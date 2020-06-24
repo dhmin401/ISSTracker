@@ -1,3 +1,4 @@
+const proxy = "https://cors-anywhere.herokuapp.com/";
 var xmlhttp = new XMLHttpRequest();
 var latitude;
 var longitude;
@@ -23,5 +24,5 @@ xmlhttp.onreadystatechange = function() {
   }
 };
 
-xmlhttp.open("GET", "http://api.open-notify.org/iss-now.json", true);
+xmlhttp.open("GET", `${proxy}http://api.open-notify.org/iss-now.json`, true);
 xmlhttp.send();
