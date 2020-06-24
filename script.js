@@ -11,16 +11,17 @@ xmlhttp.onreadystatechange = function() {
 
     var map;
     var position = { lat: parseFloat(latitude), lng: parseFloat(longitude) };
-
-    map = new google.maps.Map(document.getElementById("map"), {
-      center: position,
-      zoom: 2,
-      mapTypeId: 'satellite'
-    });
-    var marker = new google.maps.Marker({
-      position: position,
-      map: map
-    })
+    function initMap() {
+      map = new google.maps.Map(document.getElementById("map"), {
+        center: position,
+        zoom: 2,
+        mapTypeId: 'satellite'
+      });
+      var marker = new google.maps.Marker({
+        position: position,
+        map: map
+      })
+    }
   }
 };
 
