@@ -6,10 +6,22 @@ body {
 }
 
 h1 {
-    text-align: center;
-    font-family: 'Lora', serif;
+  text-align: center;
+  font-family: 'Righteous', cursive;
+  color: white;
 }
 
 #map {
-    height: 100%;
-  }
+  height: 80%;
+  width: 80%;
+  margin: auto;
+}
+
+#home {
+  background-image: url(universe.jpg);
+  display: table;
+  height: 100%;
+  position: relative;
+  width: 100%;
+  background-size: auto;
+}
