@@ -1,6 +1,6 @@
 const proxy = "https://cors-anywhere.herokuapp.com/";
 var xmlhttp = new XMLHttpRequest();
-var xmlhttp2 = new XMLHttpRequest();
+// var xmlhttp2 = new XMLHttpRequest();
 var latitude;
 var longitude;
 var position;
@@ -36,18 +36,18 @@ function initMap() {
 xmlhttp.open("GET", `${proxy}http://api.open-notify.org/iss-now.json`, true);
 xmlhttp.send();
 
-xmlhttp2.onreadystatechange = function() {
-  if(this.readyState == 4 && this.status == 200) {
-    var passTimesObj = JSON.parse(this.responseText);
-    passTimesObj.response.forEach(function(item, index){
-      var date = new Date(item.risetime * 1000);
-      document.getElementById("isspass").innerHTML += date.toString() + "<br>";
-    })
-  }
-};
+// xmlhttp2.onreadystatechange = function() {
+//   if(this.readyState == 4 && this.status == 200) {
+//     var passTimesObj = JSON.parse(this.responseText);
+//     passTimesObj.response.forEach(function(item, index){
+//       var date = new Date(item.risetime * 1000);
+//       document.getElementById("isspass").innerHTML += date.toString() + "<br>";
+//     })
+//   }
+// };
 
-xmlhttp2.open("GET", `${proxy}http://api.open-notify.org/iss-pass.json?lat=42.9849&lon=-81.2453`, true);
-xmlhttp2.send();
+// xmlhttp2.open("GET", `${proxy}http://api.open-notify.org/iss-pass.json?lat=42.9849&lon=-81.2453`, true);
+// xmlhttp2.send();
 
 var countDownDate = new Date("Nov 2, 2020 4:23:00").getTime();
 var x = setInterval(function() {
