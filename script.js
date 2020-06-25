@@ -20,7 +20,7 @@ function moveISS() {
   })
   .catch(err => console.warn(err.message));
 
-  setTimeout(moveISS, 5000);
+  setTimeout(moveISS, 10000);
 }
 
 function initMap() {
