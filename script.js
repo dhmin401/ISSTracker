@@ -1,5 +1,6 @@
 const proxy = "https://cors-anywhere.herokuapp.com/";
 var xmlhttp = new XMLHttpRequest();
+var xmlhttp2 = new XMLHttpRequest();
 var latitude;
 var longitude;
 var position;
@@ -22,19 +23,20 @@ function initMap() {
       zoom: 2,
       mapTypeId: 'satellite'
     });
-  
-    var image = 'satellite.png';
+
     var marker = new google.maps.Marker({
       position: position,
       map: map
     })
+
+    
   }
 }
 
 xmlhttp.open("GET", `${proxy}http://api.open-notify.org/iss-now.json`, true);
 xmlhttp.send();
 
-xmlhttp.onreadystatechange = function() {
+xmlhttp2.onreadystatechange = function() {
   if(this.readyState == 4 && this.status == 200) {
     var passTimesObj = JSON.parse(this.responseText);
     passTimesObj.response.forEach(function(item, index){
