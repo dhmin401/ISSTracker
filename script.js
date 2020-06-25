@@ -22,10 +22,7 @@ function initMap() {
       zoom: 2,
       mapTypeId: 'satellite'
     });
-    var infowindow = new google.maps.InfoWindow({
-      content: 'Latitude: ' + location.lat() +
-      '<br>Longitude: ' + location.lng()
-    });
+  
     var image = 'satellite.png';
     var marker = new google.maps.Marker({
       position: position,
