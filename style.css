@@ -37,8 +37,9 @@ h1 {
   opacity: 0.2;
 }
 
-h1, h2 {
+h2 {
   color: white;
+  font-family: 'Righteous', cursive;
 }
 
 p {
