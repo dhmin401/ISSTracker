@@ -30,6 +30,13 @@ function initMap() {
       icon: image
     })
 
+    var infowindow = new google.maps.InfoWindow({
+      content: location.address()
+    });
+    
+    google.maps.event.addListener(marker, 'click', function() {
+      infowindow.open(map,marker);
+    });
     
   }
 }
