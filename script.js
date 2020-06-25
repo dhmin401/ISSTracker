@@ -3,48 +3,55 @@ var latitude;
 var longitude;
 var position;
 var map;
-const key="AIzaSyDZcUlXph8m33WBt6rmYSG956diljrjZDA"
+var marker;
+var infowindow;
 
-fetch(`${proxy}http://api.open-notify.org/iss-now.json`,
-{ method: 'GET' }
-)
-.then(response => response.json())
-.then(data => {
-  latitude = data.iss_position.latitude;
-    longitude = data.iss_position.longitude;
-    position = { lat: parseFloat(latitude), lng: parseFloat(longitude) };
-    initMap();
-})
-.catch(err => console.warn(err.message));
 
-function initMap() {
-  if(latitude !== null && longitude !== null) {
-    map = new google.maps.Map(document.getElementById("map"), {
-      center: position,
-      zoom: 2
-    });
+function moveISS() {
+  fetch(`${proxy}http://api.open-notify.org/iss-now.json`,
+  { method: 'GET' }
+  )
+  .then(response => response.json())
+  .then(data => {
+    latitude = data.iss_position.latitude;
+      longitude = data.iss_position.longitude;
+      position = { lat: parseFloat(latitude), lng: parseFloat(longitude) };
+      movemarker();
+  })
+  .catch(err => console.warn(err.message));
 
-    var image = "satellite.png"
-    var marker = new google.maps.Marker({
-      position: position,
-      map: map,
-      icon: image
-    })
-
-    var infowindow = new google.maps.InfoWindow({
-      content: 'Latitude: ' + position.lat +
-    '<br>Longitude: ' + position.lng
-    });
-    
-    google.maps.event.addListener(marker, 'click', function() {
-      infowindow.open(map,marker);
-    });
-    
-  }
+  setTimeout(moveISS, 5000);
 }
 
-  var countDownDate = new Date("Nov 2, 2020 4:23:00").getTime();
-  var x = setInterval(function() {
+function initMap() {
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: null,
+    zoom: 2
+  });
+
+  var image = "satellite.png"
+  marker = new google.maps.Marker({
+    position: null,
+    map: map,
+    icon: image
+  })
+  infowindow = new google.maps.InfoWindow();
+
+  google.maps.event.addListener(marker, 'click', function() {
+    infowindow.open(map,marker);
+  });  
+  moveISS();
+}
+
+function movemarker() {
+  var latlng = new google.maps.LatLng(latitude, longitude);
+  map.panTo(latlng);
+  marker.setPosition(latlng);
+  infowindow.setContent('Latitude: ' + position.lat + '<br>Longitude: ' + position.lng);
+}
+
+var countDownDate = new Date("Nov 2, 2020 4:23:00").getTime();
+var x = setInterval(function() {
   var now = new Date().getTime();
   var distance = countDownDate - now;
 
