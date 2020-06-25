@@ -8,11 +8,38 @@
         <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
         <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZcUlXph8m33WBt6rmYSG956diljrjZDA&callback=initMap&libraries=&v=weekly" defer></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <body>
-        <div id="home">
-            <h1>ISS Tracker</h1>
-            <div id="map"></div>
+        <div class="container-fluid pb-5" id="home">
+            <div class="row justify-content-center">
+                <div class="col text-center py-5">
+                    <h1>ISS Tracker</h1>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-8" id="map"></div>
+            </div>
+            <div class="row justify-content-center">
+                <p class="col-md-8" id="isspass"></p>
+            </div>
+            <div class="row justify-content-center mt-5">
+                <div class="col-md-8">
+                    <h2>What is the ISS?</h2>
+                    <p>ISS is stand for International Space Station. The International Space Station is a large spacecraft in orbit around Earth. It serves as a home where crews of astronauts and cosmonauts live. The space station is also a unique science laboratory. Several nations worked together to build and use the space station. The space station is made of parts that were assembled in space by astronauts. It orbits Earth at an average altitude of approximately 250 miles. It travels at 17,500 mph. This means it orbits Earth every 90 minutes. NASA is using the space station to learn more about living and working in space. These lessons will make it possible to send humans farther into space than ever before.</p>
+                </div>
+            </div>
+            <div class="row justify-content-center mt-5">
+                <div class="col-md-8 text-center">
+                    <h2 id="timer">h</h2>
+                    <p>Countdown to ISS 20th</p>
+                </div>
+            </div>
+            <div class="row justify-content-center mt-5">
+                <div class="col-md-8 text-center">
+                    <a class="twitter-timeline" data-width="500" data-height="500" data-theme="dark" href="https://twitter.com/ISS_Research?ref_src=twsrc%5Etfw">Tweets by ISS_Research</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                </div>
+            </div>
         </div>
     </body>
 </html>

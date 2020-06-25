@@ -7,9 +7,9 @@ var map;
 
 xmlhttp.onreadystatechange = function() {
   if(this.readyState == 4 && this.status == 200) {
-    var scheduleObj = JSON.parse(this.responseText);
-    latitude = scheduleObj.iss_position.latitude;
-    longitude = scheduleObj.iss_position.longitude;
+    var issObj = JSON.parse(this.responseText);
+    latitude = issObj.iss_position.latitude;
+    longitude = issObj.iss_position.longitude;
     position = { lat: parseFloat(latitude), lng: parseFloat(longitude) };
     initMap(); 
   }
@@ -22,12 +22,50 @@ function initMap() {
       zoom: 2,
       mapTypeId: 'satellite'
     });
+    var infowindow = new google.maps.InfoWindow({
+      content: 'Latitude: ' + location.lat() +
+      '<br>Longitude: ' + location.lng()
+    });
+    var image = 'satellite.png';
     var marker = new google.maps.Marker({
       position: position,
-      map: map
+      map: map,
+      icon: image
     })
   }
 }
 
 xmlhttp.open("GET", `${proxy}http://api.open-notify.org/iss-now.json`, true);
 xmlhttp.send();
+
+xmlhttp.onreadystatechange = function() {
+  if(this.readyState == 4 && this.status == 200) {
+    var passTimesObj = JSON.parse(this.responseText);
+    passTimesObj.response.forEach(function(item, index){
+      var date = new Date(item.risetime * 1000);
+      document.getElementById("isspass").innerHTML += date.toString() + "<br>";
+    })
+  }
+};
+
+xmlhttp.open("GET", `${proxy}http://api.open-notify.org/iss-pass.json?lat=42.9849&lon=-81.2453`, true);
+xmlhttp.send();
+
+var countDownDate = new Date("Nov 2, 2020 4:23:00").getTime();
+var x = setInterval(function() {
+  var now = new Date().getTime();
+  var distance = countDownDate - now;
+
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  document.getElementById("timer").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+    
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("timer").innerHTML = "EXPIRED";
+  }
+}, 1000);

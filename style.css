@@ -12,16 +12,35 @@ h1 {
 }
 
 #map {
-  height: 80%;
-  width: 80%;
-  margin: auto;
+  height: 500px;  
 }
 
 #home {
   background-image: url(universe.jpg);
   display: table;
-  height: 100%;
   position: relative;
   width: 100%;
   background-size: cover;
+}
+
+#timer {
+  font-size: 30px;
+}
+
+#home::before {
+  position: absolute;
+  left: 0;
+  content: "";
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.2;
+}
+
+h1, h2 {
+  color: white;
+}
+
+p {
+  color: rgb(210, 210, 210);
 }
