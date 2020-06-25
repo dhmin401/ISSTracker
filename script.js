@@ -20,8 +20,7 @@ function initMap() {
   if(latitude !== null && longitude !== null) {
     map = new google.maps.Map(document.getElementById("map"), {
       center: position,
-      zoom: 2,
-      mapTypeId: 'satellite'
+      zoom: 2
     });
 
     var image = "satellite.png"
