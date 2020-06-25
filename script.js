@@ -31,7 +31,7 @@ function initMap() {
     })
 
     var infowindow = new google.maps.InfoWindow({
-      content: position.address()
+      content: position
     });
     
     google.maps.event.addListener(marker, 'click', function() {
