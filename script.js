@@ -24,9 +24,11 @@ function initMap() {
       mapTypeId: 'satellite'
     });
 
+    var image = "satellite.png"
     var marker = new google.maps.Marker({
       position: position,
-      map: map
+      map: map,
+      icon: image
     })
 
     
