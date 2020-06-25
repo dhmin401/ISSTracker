@@ -31,8 +31,8 @@ function initMap() {
     })
 
     var infowindow = new google.maps.InfoWindow({
-      content: 'Latitude: ' + position.lat() +
-    '<br>Longitude: ' + position.lng()
+      content: 'Latitude: ' + position.lat +
+    '<br>Longitude: ' + position.lng
     });
     
     google.maps.event.addListener(marker, 'click', function() {
