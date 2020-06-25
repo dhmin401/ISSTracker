@@ -7,7 +7,7 @@ var marker;
 var infowindow;
 
 
-function moveISS() {
+//function moveISS() {
   fetch(`${proxy}http://api.open-notify.org/iss-now.json`,
   { method: 'GET' }
   )
@@ -16,39 +16,43 @@ function moveISS() {
     latitude = data.iss_position.latitude;
       longitude = data.iss_position.longitude;
       position = { lat: parseFloat(latitude), lng: parseFloat(longitude) };
-      movemarker();
+     // movemarker();
+     initMap();
   })
   .catch(err => console.warn(err.message));
 
-  setTimeout(moveISS, 10000);
-}
+  //setTimeout(moveISS, 10000);
+//}
 
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
-    center: null,
+    center: position,
     zoom: 2
   });
 
   var image = "satellite.png"
   marker = new google.maps.Marker({
-    position: null,
+    position: position,
     map: map,
     icon: image
   })
-  infowindow = new google.maps.InfoWindow();
+  infowindow = new google.maps.InfoWindow({
+    Content:
+    'Latitude: ' + position.lat + '<br>Longitude: ' + position.lng
+  });
 
   google.maps.event.addListener(marker, 'click', function() {
     infowindow.open(map,marker);
   });  
-  moveISS();
+  //moveISS();
 }
 
-function movemarker() {
-  var latlng = new google.maps.LatLng(latitude, longitude);
-  map.panTo(latlng);
-  marker.setPosition(latlng);
-  infowindow.setContent('Latitude: ' + position.lat + '<br>Longitude: ' + position.lng);
-}
+// function movemarker() {
+//   var latlng = new google.maps.LatLng(latitude, longitude);
+//   map.panTo(latlng);
+//   marker.setPosition(latlng);
+//   infowindow.setContent('Latitude: ' + position.lat + '<br>Longitude: ' + position.lng);
+// }
 
 var countDownDate = new Date("Nov 2, 2020 4:23:00").getTime();
 var x = setInterval(function() {
