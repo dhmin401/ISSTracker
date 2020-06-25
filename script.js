@@ -46,8 +46,8 @@ xmlhttp2.onreadystatechange = function() {
   }
 };
 
-xmlhttp.open("GET", `${proxy}http://api.open-notify.org/iss-pass.json?lat=42.9849&lon=-81.2453`, true);
-xmlhttp.send();
+xmlhttp2.open("GET", `${proxy}http://api.open-notify.org/iss-pass.json?lat=42.9849&lon=-81.2453`, true);
+xmlhttp2.send();
 
 var countDownDate = new Date("Nov 2, 2020 4:23:00").getTime();
 var x = setInterval(function() {
