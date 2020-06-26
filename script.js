@@ -5,24 +5,19 @@ var position;
 var map;
 var marker;
 var infowindow;
+var geocoder;
 
-
-//function moveISS() {
-  fetch(`${proxy}http://api.open-notify.org/iss-now.json`,
-  { method: 'GET' }
-  )
-  .then(response => response.json())
-  .then(data => {
-    latitude = data.iss_position.latitude;
-      longitude = data.iss_position.longitude;
-      position = { lat: parseFloat(latitude), lng: parseFloat(longitude) };
-     // movemarker();
-     initMap();
-  })
-  .catch(err => console.warn(err.message));
-
-  //setTimeout(moveISS, 10000);
-//}
+fetch(`${proxy}http://api.open-notify.org/iss-now.json`,
+{ method: 'GET' }
+)
+.then(response => response.json())
+.then(data => {
+  latitude = data.iss_position.latitude;
+    longitude = data.iss_position.longitude;
+    position = { lat: parseFloat(latitude), lng: parseFloat(longitude) };
+    initMap();
+})
+.catch(err => console.warn(err.message));
 
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
@@ -44,15 +39,13 @@ function initMap() {
   google.maps.event.addListener(marker, 'click', function() {
     infowindow.open(map,marker);
   });  
-  //moveISS();
-}
 
-// function movemarker() {
-//   var latlng = new google.maps.LatLng(latitude, longitude);
-//   map.panTo(latlng);
-//   marker.setPosition(latlng);
-//   infowindow.setContent('Latitude: ' + position.lat + '<br>Longitude: ' + position.lng);
-// }
+  geocoder = new google.maps.Geocoder();
+
+  document.getElementById('submit').addEventListener('click', function() {
+    geocodeAddress(geocoder);
+  });
+}
 
 var countDownDate = new Date("Nov 2, 2020 4:23:00").getTime();
 var x = setInterval(function() {
@@ -71,6 +64,26 @@ var x = setInterval(function() {
     clearInterval(x);
     document.getElementById("timer").innerHTML = "EXPIRED";
   }
-}, 1000);
+ }, 1000);
 
+function geocodeAddress(geocoder) {
+  var address = document.getElementById('address').value;
+  geocoder.geocode({'address': address}, function(results, status) {
+    if (status === 'OK') {   
+      document.getElementById('isspass').innerHTML = `<h4>Five upcoming ISS passes in ${address}</h4>`;
+      fetch(`${proxy}http://api.open-notify.org/iss-pass.json?lat=${results[0].geometry.location.lat()}&lon=${results[0].geometry.location.lng()}`,
+      { method: 'GET' }
+      )
+      .then(response => response.json())
+      .then(data => {
+        data.response.forEach(element => {
+          document.getElementById('isspass').innerHTML += new Date(element.risetime * 1000) + '<br>';
+        });
+      })
+      .catch(err => console.warn(err.message));
 
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+}
