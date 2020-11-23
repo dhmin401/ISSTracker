@@ -47,7 +47,7 @@ function initMap() {
   });
 }
 
-var countDownDate = new Date("Nov 27, 1998 4:21:00").getTime();
+var countDownDate = new Date("Nov 29, 1998 2:21:00").getTime();
 var x = setInterval(function() {
   var now = new Date().getTime();
   var distance = countDownDate - now;
