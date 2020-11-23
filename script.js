@@ -47,7 +47,7 @@ function initMap() {
   });
 }
 
-var countDownDate = new Date("Nov 2, 2020 4:23:00").getTime();
+var countDownDate = new Date("Nov 29, 1998 4:23:00").getTime();
 var x = setInterval(function() {
   var now = new Date().getTime();
   var distance = countDownDate - now;
@@ -60,10 +60,6 @@ var x = setInterval(function() {
   document.getElementById("timer").innerHTML = days + "d " + hours + "h "
   + minutes + "m " + seconds + "s ";
     
-  if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("timer").innerHTML = "EXPIRED";
-  }
  }, 1000);
 
 function geocodeAddress(geocoder) {
